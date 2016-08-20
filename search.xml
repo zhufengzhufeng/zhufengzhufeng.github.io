@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[Hexo搭建静态博客]]></title>
+      <url>https://zhufengzhufeng.github.io/2014/08/20/node/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+      <content type="html"><![CDATA[<p>Hexo 是一款基于 Node.js 的快速的、简单的博客框架，能够创建一个项目进行编辑后生成一套静态网页，比较适合个人博客搭建。因为 Hexo 生成的网页不依赖数据库和任何 Web 工具，所以可以把它放在 Github上，然后配置好域名以后进行访问。<br><a id="more"></a></p>
+<h2 id="1-安装前置条件"><a href="#1-安装前置条件" class="headerlink" title="1.安装前置条件"></a>1.安装前置条件</h2><p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
+<ul>
+<li>Node.js</li>
+<li>Git  </li>
+</ul>
+<h2 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2.安装hexo"></a>2.安装hexo</h2><ul>
+<li><p>windows</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+</li>
+<li><p>mac安装</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install hexo-cli -g</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-初始化博客"><a href="#3-初始化博客" class="headerlink" title="3.初始化博客"></a>3.初始化博客</h2><ul>
+<li><p>初始博客文件夹</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装所需模块</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd blog &amp;&amp; npm install</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务查看基本结构</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-新建文章"><a href="#4-新建文章" class="headerlink" title="4.新建文章"></a>4.新建文章</h2><ul>
+<li>添加文章为md格式来进行编写  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> <span class="string">'文章名'</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-发布到git上"><a href="#5-发布到git上" class="headerlink" title="5.发布到git上"></a>5.发布到git上</h2><ul>
+<li><p>下在hexo-deployer-git插件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: &lt;repository url&gt;</div><div class="line">  branch: master</div><div class="line">  message: push</div></pre></td></tr></table></figure>
+</li>
+<li><p>部署</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参考:<a href="https://hexo.io/" target="_blank" rel="external">https://hexo.io/</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Buffer]]></title>
+      <url>https://zhufengzhufeng.github.io/2014/08/20/node/buffer/</url>
+      <content type="html"><![CDATA[<p>JS语言自身只有字符串数据类型，没有二进制数据类型，因此NodeJS提供了一个与String对等的全局构造函数Buffer来提供对二进制数据的操作。<br><img src="/img/node.png" alt=""><br><a id="more"></a></p>
+<h2 id="1-什么是Buffer"><a href="#1-什么是Buffer" class="headerlink" title="1. 什么是Buffer"></a>1. 什么是Buffer</h2><ul>
+<li>缓冲区Buffer是暂时存放输入输出数据的一段内存。</li>
+<li>JS语言没有二进制数据类型，而在处理TCP和文件流的时候，必须要处理二进制数据。</li>
+<li>NodeJS提供了一个Buffer对象来提供对二进制数据的操作</li>
+<li>是一个表示固定内存分配的全局对象，也就是说要放到缓存区中的字节数需要提前确定</li>
+<li>Buffer好比由一个多位字节元素组成的数组，可以有效的在javascript中表示二进制数据  </li>
+</ul>
+<h2 id="2-什么是字节"><a href="#2-什么是字节" class="headerlink" title="2. 什么是字节"></a>2. 什么是字节</h2><ul>
+<li>字节(Byte)是计算机存储时的一种计量单位，一个字节等于8位二进制数</li>
+<li>一个位就代表一个0或1，每8个位（bit）组成一个字节（Byte）</li>
+<li>字节是通过网络传输信息的单位</li>
+<li>一个字节最大值十进制数是255    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sum =<span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</div><div class="line">  sum += <span class="built_in">Math</span>.pow(<span class="number">2</span>,i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-定义buffer的三种方式"><a href="#3-定义buffer的三种方式" class="headerlink" title="3. 定义buffer的三种方式"></a>3. 定义buffer的三种方式</h2><ul>
+<li><p>通过长度定义buffer</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Buffer(size);</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过数组定义buffer</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Buffer(array);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>正常情况下为0-255之间;</p>
+<ul>
+<li>字符串创建  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Buffer(str,[encoding]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-buffer常用方法"><a href="#4-buffer常用方法" class="headerlink" title="4.buffer常用方法"></a>4.buffer常用方法</h2><h3 id="4-1-fill方法"><a href="#4-1-fill方法" class="headerlink" title="4.1 fill方法"></a>4.1 fill方法</h3><ul>
+<li>手动初始化,擦干净桌子,将buffer内容清0  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buffer.fill(<span class="number">0</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-write方法"><a href="#4-2-write方法" class="headerlink" title="4.2 write方法"></a>4.2 write方法</h3><ul>
+<li>string, offset, length, encoding  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buffer.write(<span class="string">'珠'</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="string">'utf8'</span>);</div><div class="line">buffer.write(<span class="string">'峰'</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="string">'utf8'</span>); <span class="comment">//珠峰</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-3-toString方法"><a href="#4-3-toString方法" class="headerlink" title="4.3 toString方法"></a>4.3 toString方法</h3><ul>
+<li>将buffer转换成字符串类型 start end 是截取的buffer的长度  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buffer.toString(<span class="string">'utf8'</span>,<span class="number">3</span>,<span class="number">6</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-4-slice方法"><a href="#4-4-slice方法" class="headerlink" title="4.4 slice方法"></a>4.4 slice方法</h3><ul>
+<li><p>截取buffer</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buffer.slice(<span class="number">0</span>,<span class="number">4</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>截取乱码问题</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> StringDecoder  = <span class="built_in">require</span>(<span class="string">'string_decoder'</span>).StringDecoder;</div><div class="line"><span class="keyword">var</span> sd = <span class="keyword">new</span> StringDecoder;</div><div class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> Buffer(<span class="string">'珠峰'</span>);</div><div class="line"><span class="built_in">console</span>.log(sd.write(buffer.slice(<span class="number">0</span>,<span class="number">4</span>)));</div><div class="line"><span class="built_in">console</span>.log(sd.write(buffer.slice(<span class="number">4</span>)));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-5-copy方法"><a href="#4-5-copy方法" class="headerlink" title="4.5 copy方法"></a>4.5 copy方法</h3><ul>
+<li>复制Buffer 把多个buffer拷贝到一个大buffer上  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sourceBuffer.copy(targetBuffer,targetstart,sourcestart,sourceend);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-6-concat方法"><a href="#4-6-concat方法" class="headerlink" title="4.6 concat方法"></a>4.6 concat方法</h3><ul>
+<li>拼接buffer  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Buffer.concat([buf1,buf2],length);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>实现concat方法</p>
+<h3 id="4-7-isBuffer"><a href="#4-7-isBuffer" class="headerlink" title="4.7 isBuffer"></a>4.7 isBuffer</h3><ul>
+<li>判断是否是buffer<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Buffer.isBuffer</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-8-length"><a href="#4-8-length" class="headerlink" title="4.8 length"></a>4.8 length</h3><ul>
+<li>获取字节长度(显示是字符串所代表buffer的长度)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Buffer.byteLength(<span class="string">"珠峰"</span>);</div><div class="line">buffer.length;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-进制转换"><a href="#5-进制转换" class="headerlink" title="5.进制转换"></a>5.进制转换</h2><ul>
+<li>将任意进制字符串转换为十进制<ul>
+<li>parseInt(“11”, 2); // 3 2进制转10进制</li>
+<li>parseInt(“77”, 8); // 63 8进制转10进制</li>
+<li>parseInt(“e7”, 16); //175 16进制转10进制</li>
+</ul>
+</li>
+<li>将10进制转换为其它进制字符串<ul>
+<li>(3).toString(2)) // “11” 十进制转2进制</li>
+<li>(17).toString(16) // “11” 十进制转16进制</li>
+<li>(33).toString(32) // “11” 十提制转32进制</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>base64的转换</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[node中的模块]]></title>
+      <url>https://zhufengzhufeng.github.io/2014/08/20/node/%E6%A8%A1%E5%9D%97/</url>
+      <content type="html"><![CDATA[<p>javaScript 从一个仅仅在浏览器上面的一个玩具语言，一转眼演变成无所不能神一般的存在。但是，由于天生存在着一点戏剧性，模块系统作为一门语言最基本的属性却是javaScript所缺的。<br><img src="/img/node.png" alt=""><br><a id="more"></a></p>
+<h2 id="1-JS的不足"><a href="#1-JS的不足" class="headerlink" title="1. JS的不足"></a>1. JS的不足</h2><p>js没有模块系统，不支持封闭作用域或依赖管理<br>没有标准库，没有文件系统API<br>没有包管理系统，不能自动加载和安装依赖</p>
+<h2 id="2-commonjs规范"><a href="#2-commonjs规范" class="headerlink" title="2.commonjs规范"></a>2.commonjs规范</h2><p>一个 node.js由大量模块组成，每个JS文件都是一个模块<br>实现了require方法，npm基于commonjs实现了自动加载和安装依赖</p>
+<h2 id="3-模块化优点"><a href="#3-模块化优点" class="headerlink" title="3.模块化优点"></a>3.模块化优点</h2><ul>
+<li>增加内聚性，有助分工协作</li>
+<li>方便重构</li>
+<li>提高代码质量</li>
+</ul>
+<h2 id="3-模块使用"><a href="#3-模块使用" class="headerlink" title="3.模块使用"></a>3.模块使用</h2><ul>
+<li>定义模块</li>
+<li>导出模块   module.exports和exports</li>
+<li>使用模块   require(‘filename’);</li>
+<li>实现原理<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">exports,require,module,__filename,__dirname</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">module</span>.exports;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>module.exports和exports的区别</p>
+<h2 id="4-require的应用"><a href="#4-require的应用" class="headerlink" title="4.require的应用"></a>4.require的应用</h2><ul>
+<li><p>加载模块后会缓存，多次加载后得到同一对象 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'./test.js'</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看模块缓存 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">require</span>.cache);</div></pre></td></tr></table></figure>
+</li>
+<li><p>查询模块绝对路径 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.resolve(<span class="string">'./test.js'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看单个的模块缓存</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.cache[<span class="built_in">require</span>.resolve(<span class="string">'./test.js'</span>)]</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除模块缓存 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="built_in">require</span>.cache[<span class="built_in">require</span>.resolve(<span class="string">'./test.js'</span>)];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-包和npm"><a href="#5-包和npm" class="headerlink" title="5.包和npm"></a>5.包和npm</h2><ul>
+<li>多个模块可以封装成一个包</li>
+<li>npm是node.js默认的模块管理器,用来安装和管理node模块 网址为 <a href="http://npmjs.org" target="_blank" rel="external">http://npmjs.org</a></li>
+<li>可以用包的方式通过npm安装、卸载、发布包</li>
+</ul>
+<h2 id="6-组织和管理模块"><a href="#6-组织和管理模块" class="headerlink" title="6.组织和管理模块"></a>6.组织和管理模块</h2><p>放置多个模块的文件夹称为包,可以通过包来对一组具有相互依赖的有关系模块进行管理。  </p>
+<ul>
+<li><p>初始化一个项目 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init -y</div></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="string">"name"</span>:<span class="string">"包的名称"</span>,</div><div class="line"><span class="string">"description"</span>：<span class="string">"包的简要说明。"</span>,</div><div class="line"><span class="string">"version"</span>:<span class="string">"版本号"</span>,</div><div class="line"><span class="string">"keywords"</span>：<span class="string">"关键字"</span>,</div><div class="line"><span class="string">"licenses"</span>:<span class="string">"许可证"</span>,</div><div class="line"><span class="string">"repositories"</span>：<span class="string">"仓库地址 "</span>,</div><div class="line"><span class="string">"dependencies"</span>:<span class="string">"包的依赖，一个关联数组，由包名称和版本组成。"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="7-安装第三方包"><a href="#7-安装第三方包" class="headerlink" title="7.安装第三方包"></a>7.安装第三方包</h2><ul>
+<li><p>全局安装 直接下载到Node的安装目录中，各个项目都可以调用,适合工具模块，比如webpack</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -global [package name]</div></pre></td></tr></table></figure>
+</li>
+<li><p>本地安装 将一个模块下载到当前目录的node_modules子目录，然后只有在当前目录和它的子目录之中，才能调用这个模块</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install  [package name] --save-dev/--save</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看全局路径</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm root -g</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="8-卸载第三方包"><a href="#8-卸载第三方包" class="headerlink" title="8.卸载第三方包"></a>8.卸载第三方包</h2><ul>
+<li><p>卸载全局 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm uninstall -g [package name]</div></pre></td></tr></table></figure>
+</li>
+<li><p>卸载本地</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm uninstall [package name] --save-dev</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="9-发布全局项目"><a href="#9-发布全局项目" class="headerlink" title="9.发布全局项目"></a>9.发布全局项目</h2><ul>
+<li><p>创建并进入目录 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir jiang &amp;&amp; cd jiang</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化项目 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init jiang</div></pre></td></tr></table></figure>
+</li>
+<li><p>注册用户</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm adduser</div></pre></td></tr></table></figure>
+</li>
+<li><p>发布项目</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm publish</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="10-源管理工具"><a href="#10-源管理工具" class="headerlink" title="10.源管理工具"></a>10.源管理工具</h2><ul>
+<li><p>安装此工具</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g nrm</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有的源</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nrm ls</div></pre></td></tr></table></figure>
+</li>
+<li><p>切换到中国源</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nrm use cnpm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意项目的名称不能是别人已经注册的名称,尽量用自己的名字做前缀 如果注册失败的话可能是因为改了镜像地址了，需要改回来 npm config set registry “<a href="http://registry.npmjs.org/" target="_blank" rel="external">http://registry.npmjs.org/</a>“ 查看所有的配置项 npm config ls</p>
+<h2 id="11-模块分类"><a href="#11-模块分类" class="headerlink" title="11.模块分类"></a>11.模块分类</h2><ul>
+<li><p>内置模块</p>
+<h3 id="util"><a href="#util" class="headerlink" title="util"></a>util</h3>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'./person'</span>);</div><div class="line">inherits继承</div><div class="line">inspect解析属性</div><div class="line">isArray isRegExp isDate isError判断类型</div></pre></td></tr></table></figure>
+</li>
+<li><p>文件模块</p>
+<h3 id="自定义模块"><a href="#自定义模块" class="headerlink" title="自定义模块"></a>自定义模块</h3>   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'./person'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>第三方模块</p>
+<h3 id="mime模块"><a href="#mime模块" class="headerlink" title="mime模块"></a>mime模块</h3>   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'mime'</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="12-模块查找规则"><a href="#12-模块查找规则" class="headerlink" title="12.模块查找规则"></a>12.模块查找规则</h2><p>当没有以’/‘或者’./‘来指向一个文件时，这个模块要么是核心模块,要么就是从node_modules文件夹加载的<br>第三方模块</p>
+<ol>
+<li>从module.paths取出第一个目录开始。</li>
+<li>直接从目录中查找，存在结束，不存在下一条。</li>
+<li>尝试添加.js、.json查找</li>
+<li>尝试将require的参数作为一个包来查找，读取package.json，取得main配置项指定的文件查找，不存在进行3</li>
+<li>继续失败查看下一个目录</li>
+</ol>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Angular指令]]></title>
+      <url>https://zhufengzhufeng.github.io/2014/08/19/angular/%E8%AF%A6%E8%A7%A3angular%E6%8C%87%E4%BB%A4/</url>
+      <content type="html"><![CDATA[<p>指令是所有AngularJS应用最重要的部分。尽管AngularJS已经提供了非常丰富的指令，但还是经常需要创建应用特定的指令。这篇文章会为你讲述如何自定义指令，创建装饰型指令以及组件式指令来扩展html标签.深入指令的所有用法,彻底领会angular指令的魅力。<br><img src="/img/angular.png" alt=""><br><a id="more"></a></p>
+<h2 id="1-angular中的指令"><a href="#1-angular中的指令" class="headerlink" title="1.angular中的指令"></a>1.angular中的指令</h2><h3 id="1-1-创建指令"><a href="#1-1-创建指令" class="headerlink" title="1.1 创建指令"></a>1.1 创建指令</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span>&gt;</span><span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'appModule'</span>,[]);</div><div class="line">app.directive(<span class="string">'myDire'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="1-2-模板"><a href="#1-2-模板" class="headerlink" title="1.2 模板"></a>1.2 模板</h3><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = angular.module('appModule',[]);</div><div class="line">app.directive('myDire',function () &#123;</div><div class="line">    return &#123;</div><div class="line"><span class="addition">+       template:'&lt;div&gt;Hello&lt;/div&gt;'   </span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="1-3-transclude"><a href="#1-3-transclude" class="headerlink" title="1.3 transclude"></a>1.3 transclude</h3><p>保留指令中的内容<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span>&gt;</span>world<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line"><span class="addition">+    transclude:true,</span></div><div class="line"><span class="deletion">-    template:'&lt;div&gt;Hello&lt;/div&gt;'</span></div><div class="line"><span class="addition">+    template:'&lt;div&gt;Hello &lt;span ng-transclude&gt;&lt;/span&gt;&lt;/div&gt;'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-3-1-面板"><a href="#1-3-1-面板" class="headerlink" title="1.3.1 面板"></a>1.3.1 面板</h4><p>引入bootstrap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.css&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>增加panel.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span>这是一个面板<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span> <span class="attr">ng-transclude</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>修改指令代码<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    transclude:true,</div><div class="line"><span class="addition">+   templateUrl:'panel.html',</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-link函数"><a href="#1-4-link函数" class="headerlink" title="1.4 link函数"></a>1.4 link函数</h3><p>link函数是用来链接视图和scope  </p>
+<ol>
+<li>scope:当前作用域</li>
+<li>element:jq对象</li>
+<li>attrs:当前指令上的属性  </li>
+</ol>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">       transclude:true,</div><div class="line">       templateUrl:'panel.html',</div><div class="line"><span class="addition">+      link: function (scope,element,attrs) &#123;</span></div><div class="line"><span class="addition">+                      </span></div><div class="line"><span class="addition">+      &#125;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-4-1-给面板增加传入的标题"><a href="#1-4-1-给面板增加传入的标题" class="headerlink" title="1.4.1 给面板增加传入的标题"></a>1.4.1 给面板增加传入的标题</h4><p>增加title属性<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">title</span>=<span class="string">"这是头部"</span>&gt;</span>这是一个面板，helloAngular<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加属性值<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class="panel panel-default"&gt;</div><div class="line"><span class="addition">+    &lt;div class="panel-heading"&gt;&#123;&#123;title&#125;&#125;&lt;/div&gt;</span></div><div class="line">     &lt;div class="panel-body" ng-transclude&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>声明标题<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">return&#123;</div><div class="line">    link: function (scope,element,attrs) &#123;</div><div class="line"><span class="addition">+      scope.title = attrs["title"];</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-5-独立作用域"><a href="#1-5-独立作用域" class="headerlink" title="1.5 独立作用域"></a>1.5 独立作用域</h3><p>可以为当前指令设置独立作用域<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line"><span class="addition">+  scope:true,</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-6-动态引用数据"><a href="#1-6-动态引用数据" class="headerlink" title="1.6 动态引用数据"></a>1.6 动态引用数据</h3><h4 id="1-6-1-“-”引用字符串"><a href="#1-6-1-“-”引用字符串" class="headerlink" title="1.6.1 “@”引用字符串"></a>1.6.1 “@”引用字符串</h4><p>指令和作用域间的交互<br>声明控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">app.controller(&apos;appCtrl&apos;,function ($scope) &#123;</div><div class="line">    $scope.title = [</div><div class="line">        &#123;name:&apos;第一个面板&apos;&#125;,</div><div class="line">        &#123;name:&apos;第二个面板&apos;&#125;</div><div class="line">    ]</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>挂载scope上的属性<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;my-dire title="&#123;&#123;title[0].name&#125;&#125;"&gt;这是一个面板，helloAngular&lt;/my-dire&gt;</div><div class="line">&lt;my-dire title="&#123;&#123;title[1].name&#125;&#125;"&gt;这是二个面板，helloAngular&lt;/my-dire&gt;</div></pre></td></tr></table></figure></p>
+<p>在当前作用域下声明title属性，引用对应的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    transclude:true,</div><div class="line">    templateUrl:&apos;panel.html&apos;,</div><div class="line">    scope:&#123;</div><div class="line">        title:&apos;@&apos;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1-6-2-“-”引用scope上的属性"><a href="#1-6-2-“-”引用scope上的属性" class="headerlink" title="1.6.2 “=”引用scope上的属性"></a>1.6.2 “=”引用scope上的属性</h4><p>修改html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">title</span>=<span class="string">"title1"</span>&gt;</span>这是一个面板，helloAngular<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">title</span>=<span class="string">"title2"</span>&gt;</span>这是一个面板，helloAngular<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加动态属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'appCtrl'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.title1 = <span class="string">'hello1'</span>;</div><div class="line">    $scope.title2 = <span class="string">'hello2'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>修改指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scope:&#123;</div><div class="line">    title:&apos;=&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1-6-3-“-”与”-”区别"><a href="#1-6-3-“-”与”-”区别" class="headerlink" title="1.6.3 “=”与”@”区别"></a>1.6.3 “=”与”@”区别</h4><p>@单向绑定<br>html页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">控制器：&lt;input type=&quot;text&quot; ng-model=&quot;home&quot;&gt;</div><div class="line">&lt;my-dire home=&quot;&#123;&#123;home&#125;&#125;&quot;&gt;&lt;/my-dire&gt;</div></pre></td></tr></table></figure></p>
+<p>控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">app.controller(&apos;appCtrl&apos;,function ($scope) &#123;</div><div class="line">    $scope.home = &apos;home&apos;</div><div class="line">&#125;);</div><div class="line">app.directive(&apos;myDire&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        transclude:true,</div><div class="line">        template:&apos;指令内部&lt;input type=&quot;text&quot; ng-model=&quot;home&quot;&gt;&apos;,</div><div class="line">        scope:&#123;</div><div class="line">            home:&apos;@&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>=双向绑定<br>html页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">控制器：&lt;input type=&quot;text&quot; ng-model=&quot;hobby&quot;&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.controller('appCtrl',function ($scope) &#123;</div><div class="line">     $scope.home = 'home';</div><div class="line"><span class="addition">+    $scope.hobby = 'hobby';</span></div><div class="line">&#125;);</div><div class="line">return &#123;</div><div class="line"><span class="addition">+   template:'指令内部&lt;input type="text" ng-model="hobby"&gt;',</span></div><div class="line">    scope:&#123;</div><div class="line">         home:'@',</div><div class="line"><span class="addition">+        hobby:'='</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-6-4-amp-绑定函数"><a href="#1-6-4-amp-绑定函数" class="headerlink" title="1.6.4 &amp;绑定函数"></a>1.6.4 &amp;绑定函数</h4><p>html绑定方法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">home</span> =<span class="string">"home(person)"</span> <span class="attr">name</span>=<span class="string">"&#123;&#123;name&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>指令中调用函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'appCtrl'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.name = <span class="string">'zfpx'</span>;</div><div class="line">    $scope.home = <span class="function"><span class="keyword">function</span> (<span class="params">who</span>) </span>&#123;</div><div class="line">        alert(who);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">app.directive(<span class="string">'myDire'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        template:<span class="string">'&#123;&#123;name&#125;&#125;&lt;div ng-click="home(&#123;person:name&#125;)"&gt;谁的家&lt;/div&gt;'</span>,</div><div class="line">        scope:&#123;</div><div class="line">            home:<span class="string">'&amp;'</span>,name:<span class="string">'@'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="1-7-replace替换指令"><a href="#1-7-replace替换指令" class="headerlink" title="1.7 replace替换指令"></a>1.7 replace替换指令</h3><p>增加replace:true替换原有指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    replace:true</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-8-compile函数"><a href="#1-8-compile函数" class="headerlink" title="1.8 compile函数"></a>1.8 compile函数</h3><p>在link函数前执行，编译模板，返回的函数为link函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;my-dire time=&quot;3&quot;&gt;&lt;/my-dire&gt;</div></pre></td></tr></table></figure></p>
+<p>指令中增加compile函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    transclude:true,</div><div class="line">    template:&apos;&lt;div&gt;Hello,zfpx &#123;&#123;title&#125;&#125;&lt;/div&gt;&apos;,</div><div class="line">    compile: function (element,attrs) &#123;</div><div class="line">        var tmpl = element.children();</div><div class="line">        for(var i = 0; i &lt; attrs.time-1;i++)&#123;</div><div class="line">            element.append(tmpl.clone());</div><div class="line">        &#125;</div><div class="line">        return function (scope,element,attrs) &#123;</div><div class="line">            scope.title = &apos;123&apos;;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="2-指令和指令间的交互"><a href="#2-指令和指令间的交互" class="headerlink" title="2.指令和指令间的交互"></a>2.指令和指令间的交互</h2><p>创建多个指令，依赖于girl指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;girl love-money  ng-click=&quot;show()&quot;&gt;Angular MM&lt;/girl&gt;</div></pre></td></tr></table></figure></p>
+<p>创建指令公有部分<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">app.directive(<span class="string">'girl'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        controller: <span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> arr = [];</div><div class="line">            <span class="keyword">this</span>.add = <span class="function"><span class="keyword">function</span> (<span class="params">attrs</span>) </span>&#123;</div><div class="line">                arr.push(attrs);</div><div class="line">            &#125;;</div><div class="line">            $scope.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                alert(arr);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>创建指令间的依赖<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">app.directive(<span class="string">'loveMoney'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="built_in">require</span>:<span class="string">'^girl'</span>,</div><div class="line">        link: <span class="function"><span class="keyword">function</span> (<span class="params">scope,element,attrs,girlCtrl</span>) </span>&#123;</div><div class="line">            girlCtrl.add(<span class="string">'loveMoney'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="3-opener指令demo"><a href="#3-opener指令demo" class="headerlink" title="3.opener指令demo"></a>3.opener指令demo</h2><p>增加css样式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">background</span>: yellow;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">background</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>增加指令<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">opener</span> <span class="attr">title</span>=<span class="string">"标题1"</span>&gt;</span>这是内容1<span class="tag">&lt;/<span class="name">opener</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加引用模板<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span> <span class="attr">ng-click</span>=<span class="string">"show()"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span> <span class="attr">ng-show</span>=<span class="string">"flag"</span> <span class="attr">ng-transclude</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加指令<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">app.directive(<span class="string">'opener'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        templateUrl:<span class="string">'open.html'</span>,</div><div class="line">        transclude:<span class="literal">true</span>,</div><div class="line">        scope:&#123;</div><div class="line">            title:<span class="string">'@'</span></div><div class="line">        &#125;,</div><div class="line">        link:<span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attrs</span>)</span>&#123;</div><div class="line">            scope.flag = <span class="literal">true</span>;</div><div class="line">            scope.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                scope.flag = !scope.flag;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="4-opener组"><a href="#4-opener组" class="headerlink" title="4.opener组"></a>4.opener组</h2><p>增加组<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">group</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">opener</span> <span class="attr">title</span>=<span class="string">"标题1"</span>&gt;</span>这是内容1<span class="tag">&lt;/<span class="name">opener</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">opener</span> <span class="attr">title</span>=<span class="string">"标题2"</span>&gt;</span>这是内容2<span class="tag">&lt;/<span class="name">opener</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">group</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>设置指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">app.directive(&apos;group&apos;, function () &#123;</div><div class="line">    return &#123;</div><div class="line">        controller: function ($scope) &#123;</div><div class="line">            var arr = [];</div><div class="line">            this.add = function (scope) &#123;</div><div class="line">                arr.push(scope);</div><div class="line">            &#125;</div><div class="line">            this.close = function (scope) &#123;</div><div class="line">                for(var i = 0; i&lt;arr.length;i++)&#123;</div><div class="line">                    if(arr[i]!=scope)&#123;</div><div class="line">                        arr[i].flag = false;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">app.directive(&apos;opener&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        templateUrl:&apos;open.html&apos;,</div><div class="line">        transclude:true,</div><div class="line">        require:&apos;^group&apos;,</div><div class="line">        scope:&#123;</div><div class="line">            title:&apos;@&apos;</div><div class="line">        &#125;,</div><div class="line">        link:function(scope,element,attrs,groupCtrl)&#123;</div><div class="line">            scope.flag = false;</div><div class="line">            scope.show = function () &#123;</div><div class="line">                scope.flag = !scope.flag;</div><div class="line">                groupCtrl.close(scope);</div><div class="line">            &#125;;</div><div class="line">            groupCtrl.add(scope);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[git基础]]></title>
+      <url>https://zhufengzhufeng.github.io/2014/08/19/git/git%E5%9F%BA%E7%A1%80/</url>
+      <content type="html"><![CDATA[<p>Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目.<br>Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。<br>Git 是一个快速、可扩展的分布式版本控制系统，它具有极为丰富的命令集，此文主要介绍git的使用,了解git的三个区,通过git连接github,以及常用git的常用命令.<br><img src="/img/git.png" alt=""><br><a id="more"></a></p>
+<h2 id="git的使用"><a href="#git的使用" class="headerlink" title="git的使用"></a>git的使用</h2><h2 id="1-版本控制"><a href="#1-版本控制" class="headerlink" title="1.版本控制"></a>1.版本控制</h2><h3 id="1-1-备份文件"><a href="#1-1-备份文件" class="headerlink" title="1.1 备份文件"></a>1.1 备份文件</h3><ul>
+<li>类似于网盘备份</li>
+<li>我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。  </li>
+</ul>
+<h3 id="1-2-记录历史"><a href="#1-2-记录历史" class="headerlink" title="1.2 记录历史"></a>1.2 记录历史</h3><ul>
+<li>比如我们打游戏就要<code>存档</code>，万一挂了还可以从上个存档的地方重玩。</li>
+<li>和网盘不同，网盘保留的是最新的状态，<code>历史的记录</code>都没有了，修改的记录也都找不回来了</li>
+<li>网盘无法知道文件里的某行<code>代码</code>是何人在哪个时间添加进去的  </li>
+</ul>
+<h3 id="1-3-回到过去"><a href="#1-3-回到过去" class="headerlink" title="1.3 回到过去"></a>1.3 回到过去</h3><ul>
+<li>如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来</li>
+</ul>
+<h3 id="1-4-多端共享"><a href="#1-4-多端共享" class="headerlink" title="1.4 多端共享"></a>1.4 多端共享</h3><ul>
+<li>Git仓库可以通过PC端、Android、IOS<code>移动端</code>等各个终端访问</li>
+<li>可以<code>随时随地</code>修改代码,公司没干完的工作回家接着干</li>
+</ul>
+<h3 id="1-5-团队协作"><a href="#1-5-团队协作" class="headerlink" title="1.5 团队协作"></a>1.5 团队协作</h3><ul>
+<li>多个人或团队<code>合作</code>编写一个项目</li>
+<li>合并代码处理<code>冲突</code></li>
+</ul>
+<h2 id="2-什么是git"><a href="#2-什么是git" class="headerlink" title="2.什么是git"></a>2.什么是git</h2><ul>
+<li>为了告别手动方式管理Linux代码,并且符合开源和免费,Linus花了<code>两周时间</code>自己用 C 写了一个分布式版本控制系统，这就是Git</li>
+<li>Git迅速成为最流行的分布式版本控制系统，尤其是 2008 年 GitHub 网站上线了，它为开源项目 免费提供Git存储 ，无数开源项目开始迁移至GitHub，包括jQuery，PHP，Ruby等等。</li>
+</ul>
+<h2 id="3-git的安装"><a href="#3-git的安装" class="headerlink" title="3.git的安装"></a>3.git的安装</h2><h3 id="3-1-windows下安装"><a href="#3-1-windows下安装" class="headerlink" title="3.1 windows下安装"></a>3.1 windows下安装</h3><p>下载地址 <a href="http://git-scm.com" target="_blank" rel="external">http://git-scm.com</a> </p>
+<p><img src="/img/git/windowdownloadgit.jpg" alt=""><br><img src="/img/git/gitinstall.jpg" alt=""><br><img src="/img/git/gitstype.jpg" alt="">  </p>
+<h3 id="3-2-mac下安装"><a href="#3-2-mac下安装" class="headerlink" title="3.2 mac下安装"></a>3.2 mac下安装</h3><p>下载Homebrew<a href="http://brew.sh" target="_blank" rel="external">http://brew.sh</a>  </p>
+<p><img src="/img/git/macinstallhomebrew.jpg" alt="">   </p>
+<ul>
+<li>拷贝对应脚本到终端下安装HomeBrew</li>
+<li>然后在终端执行 brew install git命令安装*git</li>
+</ul>
+<blockquote>
+<p>安装xcode会默认下载git</p>
+</blockquote>
+<h2 id="4-配置git用户和邮箱"><a href="#4-配置git用户和邮箱" class="headerlink" title="4. 配置git用户和邮箱"></a>4. 配置git用户和邮箱</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"你的github用户名"</span>    </div><div class="line">$ git config --global user.email <span class="string">"你的github邮箱"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>不配置用户名和邮箱的话无法提交,因为git不知道你是谁</p>
+</blockquote>
+<p>查看配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name </div><div class="line">$ git config --global user.email </div><div class="line">$ git config --list</div></pre></td></tr></table></figure>
+<h2 id="5-初始化git"><a href="#5-初始化git" class="headerlink" title="5.初始化git"></a>5.初始化git</h2><ul>
+<li>先创建一个空目录 ，然后进入此目录</li>
+<li>点击右键选择Git-Bash打开命令行</li>
+<li>输入git init命令把这个目录变成Git可以管理的仓库</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<blockquote>
+<p>通过ls -al命令查看所有文件</p>
+</blockquote>
+<h2 id="6-git中的三个区"><a href="#6-git中的三个区" class="headerlink" title="6.git中的三个区"></a>6.git中的三个区</h2><p>工作流<br><a href="http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html" target="_blank" rel="external">http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html</a></p>
+<ul>
+<li><p>工作区  </p>
+<p>  通过git add 添加到暂存区</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add <span class="string">'文件名'</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>暂存区<br>特点:<code>过渡</code>的作用，避免<code>误操作</code>，<code>保护</code>工作区和历史区，分支处理;   </p>
+<p>通过git commit 添加到历史区</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m<span class="string">"注释内容"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>历史区  </p>
+<p>  查看历史状态</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>修改时通过git status查看当前状态</p>
+</blockquote>
+<h2 id="7-git-diff"><a href="#7-git-diff" class="headerlink" title="7.git diff"></a>7.git diff</h2><p>不同区的代码比较 </p>
+<h3 id="7-1-工作区和暂存区"><a href="#7-1-工作区和暂存区" class="headerlink" title="7.1 工作区和暂存区"></a>7.1 工作区和暂存区</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff</div></pre></td></tr></table></figure>
+<h3 id="7-2-暂存区和历史区"><a href="#7-2-暂存区和历史区" class="headerlink" title="7.2 暂存区和历史区"></a>7.2 暂存区和历史区</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff --cached（--staged）</div></pre></td></tr></table></figure>
+<h3 id="7-3-工作区和版本库"><a href="#7-3-工作区和版本库" class="headerlink" title="7.3 工作区和版本库"></a>7.3 工作区和版本库</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff master</div></pre></td></tr></table></figure>
+<h2 id="8-撤销"><a href="#8-撤销" class="headerlink" title="8. 撤销"></a>8. 撤销</h2><h3 id="8-1-撤销回git-add的内容"><a href="#8-1-撤销回git-add的内容" class="headerlink" title="8.1 撤销回git add的内容"></a>8.1 撤销回git add的内容</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset Head <span class="string">"文件名"</span></div></pre></td></tr></table></figure>
+<h3 id="8-2-撤回文件"><a href="#8-2-撤回文件" class="headerlink" title="8.2 撤回文件"></a>8.2 撤回文件</h3><ul>
+<li>先从缓存区撤销,缓存区无内容，从历史区域撤销<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout <span class="string">"文件名"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>有的时候我们希望提交时合并到上一次的提交 git commit –amend</p>
+</blockquote>
+<h2 id="9-删除"><a href="#9-删除" class="headerlink" title="9.删除"></a>9.删除</h2><h3 id="9-1-删除暂存区和工作区"><a href="#9-1-删除暂存区和工作区" class="headerlink" title="9.1 删除暂存区和工作区"></a>9.1 删除暂存区和工作区</h3><p>删除暂存区中的内容,并且保证工作区中的内容已经不存在<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm <span class="string">"文件名"</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>若本地文件存在则不能删除，需要通过-f参数删除</p>
+</blockquote>
+<h3 id="9-2-仅删除缓存区"><a href="#9-2-仅删除缓存区" class="headerlink" title="9.2 仅删除缓存区"></a>9.2 仅删除缓存区</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm --cached <span class="string">"文件名"</span></div></pre></td></tr></table></figure>
+<h2 id="10-恢复"><a href="#10-恢复" class="headerlink" title="10. 恢复"></a>10. 恢复</h2><h3 id="10-1-恢复某个版本文件"><a href="#10-1-恢复某个版本文件" class="headerlink" title="10.1 恢复某个版本文件"></a>10.1 恢复某个版本文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout commit_id filename 某个文件</div></pre></td></tr></table></figure>
+<h3 id="10-2-通过版本id恢复"><a href="#10-2-通过版本id恢复" class="headerlink" title="10.2 通过版本id恢复"></a>10.2 通过版本id恢复</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard commit_id</div></pre></td></tr></table></figure>
+<h3 id="10-3-恢复未来"><a href="#10-3-恢复未来" class="headerlink" title="10.3 恢复未来"></a>10.3 恢复未来</h3><p>查看当时回滚时的版本<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div></pre></td></tr></table></figure></p>
+<h3 id="10-4-快速版本回退"><a href="#10-4-快速版本回退" class="headerlink" title="10.4 快速版本回退"></a>10.4 快速版本回退</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard HEAD^</div><div class="line">$ git reset --hard HEAD~<span class="number">3</span></div></pre></td></tr></table></figure>
+<h2 id="11-同步远程仓库"><a href="#11-同步远程仓库" class="headerlink" title="11. 同步远程仓库"></a>11. 同步远程仓库</h2><h3 id="11-1-gitHub"><a href="#11-1-gitHub" class="headerlink" title="11.1 gitHub"></a>11.1 gitHub</h3><ul>
+<li>注册账号</li>
+<li>新建项目  </li>
+</ul>
+<h3 id="11-2-添加远程仓库"><a href="#11-2-添加远程仓库" class="headerlink" title="11.2 添加远程仓库"></a>11.2 添加远程仓库</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin <span class="string">"地址"</span></div></pre></td></tr></table></figure>
+<h3 id="11-3-添加忽略文件"><a href="#11-3-添加忽略文件" class="headerlink" title="11.3 添加忽略文件"></a>11.3 添加忽略文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ touch .gitignore</div><div class="line">$ echo .DS_Store</div><div class="line">$ echo node_modules</div><div class="line">$ echo .idea</div></pre></td></tr></table></figure>
+<h3 id="11-4-推送代码"><a href="#11-4-推送代码" class="headerlink" title="11.4 推送代码"></a>11.4 推送代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+<h3 id="11-5-查看"><a href="#11-5-查看" class="headerlink" title="11.5 查看"></a>11.5 查看</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git remote 查看名字</div><div class="line">$ git remote -v 查看地址</div></pre></td></tr></table></figure>
+<h2 id="12-代码的合并"><a href="#12-代码的合并" class="headerlink" title="12.代码的合并"></a>12.代码的合并</h2><h3 id="12-1-git-fetch"><a href="#12-1-git-fetch" class="headerlink" title="12.1 git fetch"></a>12.1 git fetch</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git fetch</div></pre></td></tr></table></figure>
+<p>拉取过来手动合并<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git diff master origin/master</div><div class="line">$ git merge origin/master</div></pre></td></tr></table></figure></p>
+<h3 id="12-2-git-pull"><a href="#12-2-git-pull" class="headerlink" title="12.2 git pull"></a>12.2 git pull</h3><p>拉取并合并<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull</div></pre></td></tr></table></figure></p>
+<h3 id="13-作业提交流程"><a href="#13-作业提交流程" class="headerlink" title="13. 作业提交流程"></a>13. 作业提交流程</h3><h3 id="13-1-第一次交作业流程-组长"><a href="#13-1-第一次交作业流程-组长" class="headerlink" title="13.1 第一次交作业流程(组长)"></a>13.1 第一次交作业流程(组长)</h3><ul>
+<li><code>fork</code>珠峰培训讲师的作业仓库</li>
+<li>把自己的仓库<code>下载</code>到本地</li>
+<li>把自己的作业 <code>上传</code>到自己的github仓库</li>
+<li>发<code>pull request</code>给讲师</li>
+<li>添加组员账号  </li>
+</ul>
+<h3 id="13-2-第二次交作业流程-组员"><a href="#13-2-第二次交作业流程-组员" class="headerlink" title="13.2 第二次交作业流程(组员)"></a>13.2 第二次交作业流程(组员)</h3><ul>
+<li>克隆组长项目</li>
+<li>先<code>拉取</code>组长仓库最新代码</li>
+<li>将自己的作业（放入对应的文件夹）</li>
+<li>git add/git commit</li>
+<li>再push前拉取组长仓库最新代码</li>
+<li>push到组长仓库</li>
+</ul>
+<h3 id="13-3-第二次交作业流程-组长"><a href="#13-3-第二次交作业流程-组长" class="headerlink" title="13.3 第二次交作业流程(组长)"></a>13.3 第二次交作业流程(组长)</h3><ul>
+<li>在本地<code>增加</code>讲师仓库</li>
+<li><code>拉取</code>自己的最新代码</li>
+<li><code>拉取</code>老师的最新的代码,如果冲突需要解决冲突</li>
+<li>把自己的作业 拷贝进去(如果组长没有要提交的东西可省略)</li>
+<li>把自己的作业上<code>传到</code>自己的github仓库(如果组长没有要提交的东西可省略)</li>
+<li>发<code>pull request</code>给讲师</li>
+</ul>
+<hr>
+<blockquote>
+<p>参考教程<a href="http://school.zhufengpeixun.cn/course/31" target="_blank" rel="external">http://school.zhufengpeixun.cn/course/31</a></p>
+</blockquote>
+]]></content>
+    </entry>
+    
+  
+  
+</search>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Tag: 模块 | Tanlent Corder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="web">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tanlent Corder">
+<meta property="og:url" content="https://zhufengzhufeng.github.io/tags/模块/index.html">
+<meta property="og:site_name" content="Tanlent Corder">
+<meta property="og:description" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tanlent Corder">
+<meta name="twitter:description" content="web">
+  
+    <link rel="alternate" href="/atom.xml" title="Tanlent Corder" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+
+
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tanlent Corder</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <div class="mylogo"></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章收藏</a>
+        
+      </nav>
+      <!--<nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>-->
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhufengzhufeng.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+<article class="outer searchbox" >
+  <form id="search-form"> <!-- 搜索框相关 -->
+    <label for="local-search-input" class="label-en">搜索文章</label>
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索文章" class="search form-control" autocomplete="off" autocorrect="off"/>
+    <i class="fa fa-times" onclick="resetSearch()">重置</i> <!-- 清空/重置搜索框 -->
+
+  </form>
+  <div style="clear: both"></div>
+  <div id="local-search-result"></div> <!-- 搜索结果区 -->
+  <p class='no-result'>No results found </p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 -->
+</article>
+
+
+
+<style>
+  /*搜索框*/
+  .searchbox{
+    padding-top: 20px;
+  }
+  .label-en{
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    line-height: 30px;
+
+  }
+  .search {
+    width: 60%;
+    height: 30px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    border: 1px solid #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    border-radius: 2px;
+    opacity: 0.65;
+    background: #fff;
+    padding:0 2%;
+    float: left;
+  }
+  #search-form,#local-search-result,.no-result{
+    width: 73.33333333333333%;
+    margin: 0 0.833333333333333%;
+  }
+
+
+  /*搜索重置按钮*/
+  #search-form .fa-times {
+    display: none;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    cursor: pointer;
+    color: #999;
+    background:#fff;
+    margin: 0 10px;
+    width: 10%;
+    text-align: center;
+  }
+  #search-form .fa-times:active {
+    background: #d3d3d3;
+  }
+
+  /*搜索结果区*/
+  #local-search-result {
+    font-size: 0.9em;
+    text-align: left;
+    word-break: break-all;
+  }
+
+  #local-search-result ul.search-result-list li:hover {
+    font-weight: normal;
+  }
+
+  /*单条搜索结果*/
+  #local-search-result li {
+    margin: 0.5em auto;
+    border-bottom: 2px solid #d3d3d3;
+  }
+  #local-search-result .search-result-list li:hover {
+    background: rgba(158,188,226,0.21);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  }
+
+  /*匹配的标题*/
+  #local-search-result a.search-result-title {
+    line-height: 1.2;
+    font-weight: bold;
+    color: #708090;
+  }
+
+  /*搜索预览段落*/
+  #local-search-result p.search-result {
+    margin: 0.4em auto;
+    line-height: 1.2em;
+    max-height: 3.6em;
+    overflow: hidden;
+    font-size: 0.8em;
+    text-align: justify;
+    color: #808080;
+  }
+
+  /*匹配的关键词*/
+  #local-search-result em.search-keyword {
+    color: #f58e90;
+    border-bottom: 1px dashed #f58e90;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+
+  /*无匹配搜索结果时显示*/
+  p.no-result {
+    display: none;
+    padding-bottom: 0.5em;
+    text-align: left;
+    color: #808080;
+    font-family: font-serif serif;
+    border-bottom: 2px solid #d3d3d3;
+  }
+</style>
+      <div class="outer">
+        <section id="main">
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2014" class="archive-year">2014</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2014/08/20/node/模块/" class="archive-article-date">
+  <time datetime="2014-08-19T21:00:00.000Z" itemprop="datePublished">8月 20</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2014/08/20/node/模块/">node中的模块</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIT的使用/">GIT的使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/NODE/">NODE</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/08/20/node/hexo搭建博客/">Hexo搭建静态博客</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/20/node/buffer/">Buffer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/20/node/模块/">node中的模块</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/19/angular/详解angular指令/">Angular指令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/19/git/git基础/">git基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 JW<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章收藏</a>
+  
+</nav>
+    
+
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/search.js"></script>
+
+  </div>
+</body>
+</html>

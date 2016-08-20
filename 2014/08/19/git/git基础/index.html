@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git基础 | Tanlent Corder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目.Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。Git 是一个快速、可扩展的分布式版本控制系统，它具有极为丰富的命令集，此文主要介绍git的使用,了解git的三个区,通过git连接github,以及常用git的常用命令.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git基础">
+<meta property="og:url" content="https://zhufengzhufeng.github.io/2014/08/19/git/git基础/index.html">
+<meta property="og:site_name" content="Tanlent Corder">
+<meta property="og:description" content="Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目.Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。Git 是一个快速、可扩展的分布式版本控制系统，它具有极为丰富的命令集，此文主要介绍git的使用,了解git的三个区,通过git连接github,以及常用git的常用命令.">
+<meta property="og:image" content="https://zhufengzhufeng.github.io/img/git.png">
+<meta property="og:image" content="https://zhufengzhufeng.github.io/img/git/windowdownloadgit.jpg">
+<meta property="og:image" content="https://zhufengzhufeng.github.io/img/git/gitinstall.jpg">
+<meta property="og:image" content="https://zhufengzhufeng.github.io/img/git/gitstype.jpg">
+<meta property="og:image" content="https://zhufengzhufeng.github.io/img/git/macinstallhomebrew.jpg">
+<meta property="og:updated_time" content="2016-08-19T08:47:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git基础">
+<meta name="twitter:description" content="Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目.Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。Git 是一个快速、可扩展的分布式版本控制系统，它具有极为丰富的命令集，此文主要介绍git的使用,了解git的三个区,通过git连接github,以及常用git的常用命令.">
+<meta name="twitter:image" content="https://zhufengzhufeng.github.io/img/git.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Tanlent Corder" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+
+
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tanlent Corder</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <div class="mylogo"></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章收藏</a>
+        
+      </nav>
+      <!--<nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>-->
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhufengzhufeng.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+<article class="outer searchbox" >
+  <form id="search-form"> <!-- 搜索框相关 -->
+    <label for="local-search-input" class="label-en">搜索文章</label>
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索文章" class="search form-control" autocomplete="off" autocorrect="off"/>
+    <i class="fa fa-times" onclick="resetSearch()">重置</i> <!-- 清空/重置搜索框 -->
+
+  </form>
+  <div style="clear: both"></div>
+  <div id="local-search-result"></div> <!-- 搜索结果区 -->
+  <p class='no-result'>No results found </p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 -->
+</article>
+
+
+
+<style>
+  /*搜索框*/
+  .searchbox{
+    padding-top: 20px;
+  }
+  .label-en{
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    line-height: 30px;
+
+  }
+  .search {
+    width: 60%;
+    height: 30px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    border: 1px solid #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    border-radius: 2px;
+    opacity: 0.65;
+    background: #fff;
+    padding:0 2%;
+    float: left;
+  }
+  #search-form,#local-search-result,.no-result{
+    width: 73.33333333333333%;
+    margin: 0 0.833333333333333%;
+  }
+
+
+  /*搜索重置按钮*/
+  #search-form .fa-times {
+    display: none;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    cursor: pointer;
+    color: #999;
+    background:#fff;
+    margin: 0 10px;
+    width: 10%;
+    text-align: center;
+  }
+  #search-form .fa-times:active {
+    background: #d3d3d3;
+  }
+
+  /*搜索结果区*/
+  #local-search-result {
+    font-size: 0.9em;
+    text-align: left;
+    word-break: break-all;
+  }
+
+  #local-search-result ul.search-result-list li:hover {
+    font-weight: normal;
+  }
+
+  /*单条搜索结果*/
+  #local-search-result li {
+    margin: 0.5em auto;
+    border-bottom: 2px solid #d3d3d3;
+  }
+  #local-search-result .search-result-list li:hover {
+    background: rgba(158,188,226,0.21);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  }
+
+  /*匹配的标题*/
+  #local-search-result a.search-result-title {
+    line-height: 1.2;
+    font-weight: bold;
+    color: #708090;
+  }
+
+  /*搜索预览段落*/
+  #local-search-result p.search-result {
+    margin: 0.4em auto;
+    line-height: 1.2em;
+    max-height: 3.6em;
+    overflow: hidden;
+    font-size: 0.8em;
+    text-align: justify;
+    color: #808080;
+  }
+
+  /*匹配的关键词*/
+  #local-search-result em.search-keyword {
+    color: #f58e90;
+    border-bottom: 1px dashed #f58e90;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+
+  /*无匹配搜索结果时显示*/
+  p.no-result {
+    display: none;
+    padding-bottom: 0.5em;
+    text-align: left;
+    color: #808080;
+    font-family: font-serif serif;
+    border-bottom: 2px solid #d3d3d3;
+  }
+</style>
+      <div class="outer">
+        <section id="main">
+
+
+
+
+
+<article id="post-git/git基础" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+
+
+
+
+
+  
+  <div class="article-meta">
+    <a href="/2014/08/19/git/git基础/" class="article-date">
+  <time datetime="2014-08-19T09:16:45.000Z" itemprop="datePublished">2014-08-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/GIT的使用/">GIT的使用</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目.<br>Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。<br>Git 是一个快速、可扩展的分布式版本控制系统，它具有极为丰富的命令集，此文主要介绍git的使用,了解git的三个区,通过git连接github,以及常用git的常用命令.<br><img src="/img/git.png" alt=""><br><a id="more"></a></p>
+<h2 id="git的使用"><a href="#git的使用" class="headerlink" title="git的使用"></a>git的使用</h2><h2 id="1-版本控制"><a href="#1-版本控制" class="headerlink" title="1.版本控制"></a>1.版本控制</h2><h3 id="1-1-备份文件"><a href="#1-1-备份文件" class="headerlink" title="1.1 备份文件"></a>1.1 备份文件</h3><ul>
+<li>类似于网盘备份</li>
+<li>我们的代码也需要备份。修改完了以后提交给版本库进行保管，哪一天代码没了也可以找回来。  </li>
+</ul>
+<h3 id="1-2-记录历史"><a href="#1-2-记录历史" class="headerlink" title="1.2 记录历史"></a>1.2 记录历史</h3><ul>
+<li>比如我们打游戏就要<code>存档</code>，万一挂了还可以从上个存档的地方重玩。</li>
+<li>和网盘不同，网盘保留的是最新的状态，<code>历史的记录</code>都没有了，修改的记录也都找不回来了</li>
+<li>网盘无法知道文件里的某行<code>代码</code>是何人在哪个时间添加进去的  </li>
+</ul>
+<h3 id="1-3-回到过去"><a href="#1-3-回到过去" class="headerlink" title="1.3 回到过去"></a>1.3 回到过去</h3><ul>
+<li>如果我有一天不小心删除了某个文件，我们可以通过历史备份找回来</li>
+</ul>
+<h3 id="1-4-多端共享"><a href="#1-4-多端共享" class="headerlink" title="1.4 多端共享"></a>1.4 多端共享</h3><ul>
+<li>Git仓库可以通过PC端、Android、IOS<code>移动端</code>等各个终端访问</li>
+<li>可以<code>随时随地</code>修改代码,公司没干完的工作回家接着干</li>
+</ul>
+<h3 id="1-5-团队协作"><a href="#1-5-团队协作" class="headerlink" title="1.5 团队协作"></a>1.5 团队协作</h3><ul>
+<li>多个人或团队<code>合作</code>编写一个项目</li>
+<li>合并代码处理<code>冲突</code></li>
+</ul>
+<h2 id="2-什么是git"><a href="#2-什么是git" class="headerlink" title="2.什么是git"></a>2.什么是git</h2><ul>
+<li>为了告别手动方式管理Linux代码,并且符合开源和免费,Linus花了<code>两周时间</code>自己用 C 写了一个分布式版本控制系统，这就是Git</li>
+<li>Git迅速成为最流行的分布式版本控制系统，尤其是 2008 年 GitHub 网站上线了，它为开源项目 免费提供Git存储 ，无数开源项目开始迁移至GitHub，包括jQuery，PHP，Ruby等等。</li>
+</ul>
+<h2 id="3-git的安装"><a href="#3-git的安装" class="headerlink" title="3.git的安装"></a>3.git的安装</h2><h3 id="3-1-windows下安装"><a href="#3-1-windows下安装" class="headerlink" title="3.1 windows下安装"></a>3.1 windows下安装</h3><p>下载地址 <a href="http://git-scm.com" target="_blank" rel="external">http://git-scm.com</a> </p>
+<p><img src="/img/git/windowdownloadgit.jpg" alt=""><br><img src="/img/git/gitinstall.jpg" alt=""><br><img src="/img/git/gitstype.jpg" alt="">  </p>
+<h3 id="3-2-mac下安装"><a href="#3-2-mac下安装" class="headerlink" title="3.2 mac下安装"></a>3.2 mac下安装</h3><p>下载Homebrew<a href="http://brew.sh" target="_blank" rel="external">http://brew.sh</a>  </p>
+<p><img src="/img/git/macinstallhomebrew.jpg" alt="">   </p>
+<ul>
+<li>拷贝对应脚本到终端下安装HomeBrew</li>
+<li>然后在终端执行 brew install git命令安装*git</li>
+</ul>
+<blockquote>
+<p>安装xcode会默认下载git</p>
+</blockquote>
+<h2 id="4-配置git用户和邮箱"><a href="#4-配置git用户和邮箱" class="headerlink" title="4. 配置git用户和邮箱"></a>4. 配置git用户和邮箱</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"你的github用户名"</span>    </div><div class="line">$ git config --global user.email <span class="string">"你的github邮箱"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>不配置用户名和邮箱的话无法提交,因为git不知道你是谁</p>
+</blockquote>
+<p>查看配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name </div><div class="line">$ git config --global user.email </div><div class="line">$ git config --list</div></pre></td></tr></table></figure>
+<h2 id="5-初始化git"><a href="#5-初始化git" class="headerlink" title="5.初始化git"></a>5.初始化git</h2><ul>
+<li>先创建一个空目录 ，然后进入此目录</li>
+<li>点击右键选择Git-Bash打开命令行</li>
+<li>输入git init命令把这个目录变成Git可以管理的仓库</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<blockquote>
+<p>通过ls -al命令查看所有文件</p>
+</blockquote>
+<h2 id="6-git中的三个区"><a href="#6-git中的三个区" class="headerlink" title="6.git中的三个区"></a>6.git中的三个区</h2><p>工作流<br><a href="http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html" target="_blank" rel="external">http://card.mugeda.com/campaigns/56d2c4a0a3664e3308000407/20160304090522/56d97729a3664e9c65000047/index.html</a></p>
+<ul>
+<li><p>工作区  </p>
+<p>  通过git add 添加到暂存区</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add <span class="string">'文件名'</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>暂存区<br>特点:<code>过渡</code>的作用，避免<code>误操作</code>，<code>保护</code>工作区和历史区，分支处理;   </p>
+<p>通过git commit 添加到历史区</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m<span class="string">"注释内容"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>历史区  </p>
+<p>  查看历史状态</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>修改时通过git status查看当前状态</p>
+</blockquote>
+<h2 id="7-git-diff"><a href="#7-git-diff" class="headerlink" title="7.git diff"></a>7.git diff</h2><p>不同区的代码比较 </p>
+<h3 id="7-1-工作区和暂存区"><a href="#7-1-工作区和暂存区" class="headerlink" title="7.1 工作区和暂存区"></a>7.1 工作区和暂存区</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff</div></pre></td></tr></table></figure>
+<h3 id="7-2-暂存区和历史区"><a href="#7-2-暂存区和历史区" class="headerlink" title="7.2 暂存区和历史区"></a>7.2 暂存区和历史区</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff --cached（--staged）</div></pre></td></tr></table></figure>
+<h3 id="7-3-工作区和版本库"><a href="#7-3-工作区和版本库" class="headerlink" title="7.3 工作区和版本库"></a>7.3 工作区和版本库</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff master</div></pre></td></tr></table></figure>
+<h2 id="8-撤销"><a href="#8-撤销" class="headerlink" title="8. 撤销"></a>8. 撤销</h2><h3 id="8-1-撤销回git-add的内容"><a href="#8-1-撤销回git-add的内容" class="headerlink" title="8.1 撤销回git add的内容"></a>8.1 撤销回git add的内容</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset Head <span class="string">"文件名"</span></div></pre></td></tr></table></figure>
+<h3 id="8-2-撤回文件"><a href="#8-2-撤回文件" class="headerlink" title="8.2 撤回文件"></a>8.2 撤回文件</h3><ul>
+<li>先从缓存区撤销,缓存区无内容，从历史区域撤销<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout <span class="string">"文件名"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>有的时候我们希望提交时合并到上一次的提交 git commit –amend</p>
+</blockquote>
+<h2 id="9-删除"><a href="#9-删除" class="headerlink" title="9.删除"></a>9.删除</h2><h3 id="9-1-删除暂存区和工作区"><a href="#9-1-删除暂存区和工作区" class="headerlink" title="9.1 删除暂存区和工作区"></a>9.1 删除暂存区和工作区</h3><p>删除暂存区中的内容,并且保证工作区中的内容已经不存在<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm <span class="string">"文件名"</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>若本地文件存在则不能删除，需要通过-f参数删除</p>
+</blockquote>
+<h3 id="9-2-仅删除缓存区"><a href="#9-2-仅删除缓存区" class="headerlink" title="9.2 仅删除缓存区"></a>9.2 仅删除缓存区</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm --cached <span class="string">"文件名"</span></div></pre></td></tr></table></figure>
+<h2 id="10-恢复"><a href="#10-恢复" class="headerlink" title="10. 恢复"></a>10. 恢复</h2><h3 id="10-1-恢复某个版本文件"><a href="#10-1-恢复某个版本文件" class="headerlink" title="10.1 恢复某个版本文件"></a>10.1 恢复某个版本文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout commit_id filename 某个文件</div></pre></td></tr></table></figure>
+<h3 id="10-2-通过版本id恢复"><a href="#10-2-通过版本id恢复" class="headerlink" title="10.2 通过版本id恢复"></a>10.2 通过版本id恢复</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard commit_id</div></pre></td></tr></table></figure>
+<h3 id="10-3-恢复未来"><a href="#10-3-恢复未来" class="headerlink" title="10.3 恢复未来"></a>10.3 恢复未来</h3><p>查看当时回滚时的版本<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div></pre></td></tr></table></figure></p>
+<h3 id="10-4-快速版本回退"><a href="#10-4-快速版本回退" class="headerlink" title="10.4 快速版本回退"></a>10.4 快速版本回退</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard HEAD^</div><div class="line">$ git reset --hard HEAD~<span class="number">3</span></div></pre></td></tr></table></figure>
+<h2 id="11-同步远程仓库"><a href="#11-同步远程仓库" class="headerlink" title="11. 同步远程仓库"></a>11. 同步远程仓库</h2><h3 id="11-1-gitHub"><a href="#11-1-gitHub" class="headerlink" title="11.1 gitHub"></a>11.1 gitHub</h3><ul>
+<li>注册账号</li>
+<li>新建项目  </li>
+</ul>
+<h3 id="11-2-添加远程仓库"><a href="#11-2-添加远程仓库" class="headerlink" title="11.2 添加远程仓库"></a>11.2 添加远程仓库</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin <span class="string">"地址"</span></div></pre></td></tr></table></figure>
+<h3 id="11-3-添加忽略文件"><a href="#11-3-添加忽略文件" class="headerlink" title="11.3 添加忽略文件"></a>11.3 添加忽略文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ touch .gitignore</div><div class="line">$ echo .DS_Store</div><div class="line">$ echo node_modules</div><div class="line">$ echo .idea</div></pre></td></tr></table></figure>
+<h3 id="11-4-推送代码"><a href="#11-4-推送代码" class="headerlink" title="11.4 推送代码"></a>11.4 推送代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+<h3 id="11-5-查看"><a href="#11-5-查看" class="headerlink" title="11.5 查看"></a>11.5 查看</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git remote 查看名字</div><div class="line">$ git remote -v 查看地址</div></pre></td></tr></table></figure>
+<h2 id="12-代码的合并"><a href="#12-代码的合并" class="headerlink" title="12.代码的合并"></a>12.代码的合并</h2><h3 id="12-1-git-fetch"><a href="#12-1-git-fetch" class="headerlink" title="12.1 git fetch"></a>12.1 git fetch</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git fetch</div></pre></td></tr></table></figure>
+<p>拉取过来手动合并<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git diff master origin/master</div><div class="line">$ git merge origin/master</div></pre></td></tr></table></figure></p>
+<h3 id="12-2-git-pull"><a href="#12-2-git-pull" class="headerlink" title="12.2 git pull"></a>12.2 git pull</h3><p>拉取并合并<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull</div></pre></td></tr></table></figure></p>
+<h3 id="13-作业提交流程"><a href="#13-作业提交流程" class="headerlink" title="13. 作业提交流程"></a>13. 作业提交流程</h3><h3 id="13-1-第一次交作业流程-组长"><a href="#13-1-第一次交作业流程-组长" class="headerlink" title="13.1 第一次交作业流程(组长)"></a>13.1 第一次交作业流程(组长)</h3><ul>
+<li><code>fork</code>珠峰培训讲师的作业仓库</li>
+<li>把自己的仓库<code>下载</code>到本地</li>
+<li>把自己的作业 <code>上传</code>到自己的github仓库</li>
+<li>发<code>pull request</code>给讲师</li>
+<li>添加组员账号  </li>
+</ul>
+<h3 id="13-2-第二次交作业流程-组员"><a href="#13-2-第二次交作业流程-组员" class="headerlink" title="13.2 第二次交作业流程(组员)"></a>13.2 第二次交作业流程(组员)</h3><ul>
+<li>克隆组长项目</li>
+<li>先<code>拉取</code>组长仓库最新代码</li>
+<li>将自己的作业（放入对应的文件夹）</li>
+<li>git add/git commit</li>
+<li>再push前拉取组长仓库最新代码</li>
+<li>push到组长仓库</li>
+</ul>
+<h3 id="13-3-第二次交作业流程-组长"><a href="#13-3-第二次交作业流程-组长" class="headerlink" title="13.3 第二次交作业流程(组长)"></a>13.3 第二次交作业流程(组长)</h3><ul>
+<li>在本地<code>增加</code>讲师仓库</li>
+<li><code>拉取</code>自己的最新代码</li>
+<li><code>拉取</code>老师的最新的代码,如果冲突需要解决冲突</li>
+<li>把自己的作业 拷贝进去(如果组长没有要提交的东西可省略)</li>
+<li>把自己的作业上<code>传到</code>自己的github仓库(如果组长没有要提交的东西可省略)</li>
+<li>发<code>pull request</code>给讲师</li>
+</ul>
+<hr>
+<blockquote>
+<p>参考教程<a href="http://school.zhufengpeixun.cn/course/31" target="_blank" rel="external">http://school.zhufengpeixun.cn/course/31</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zhufengzhufeng.github.io/2014/08/19/git/git基础/" data-id="cis3a23ky0004fxfyos6vcw9s" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/08/19/angular/详解angular指令/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Angular指令
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIT的使用/">GIT的使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/NODE/">NODE</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/08/20/node/hexo搭建博客/">Hexo搭建静态博客</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/20/node/buffer/">Buffer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/20/node/模块/">node中的模块</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/19/angular/详解angular指令/">Angular指令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/19/git/git基础/">git基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 JW<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章收藏</a>
+  
+</nav>
+    
+
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/search.js"></script>
+
+  </div>
+</body>
+</html>

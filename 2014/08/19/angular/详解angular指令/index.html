@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular指令 | Tanlent Corder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="指令是所有AngularJS应用最重要的部分。尽管AngularJS已经提供了非常丰富的指令，但还是经常需要创建应用特定的指令。这篇文章会为你讲述如何自定义指令，创建装饰型指令以及组件式指令来扩展html标签.深入指令的所有用法,彻底领会angular指令的魅力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular指令">
+<meta property="og:url" content="https://zhufengzhufeng.github.io/2014/08/19/angular/详解angular指令/index.html">
+<meta property="og:site_name" content="Tanlent Corder">
+<meta property="og:description" content="指令是所有AngularJS应用最重要的部分。尽管AngularJS已经提供了非常丰富的指令，但还是经常需要创建应用特定的指令。这篇文章会为你讲述如何自定义指令，创建装饰型指令以及组件式指令来扩展html标签.深入指令的所有用法,彻底领会angular指令的魅力。">
+<meta property="og:image" content="https://zhufengzhufeng.github.io/img/angular.png">
+<meta property="og:updated_time" content="2016-08-20T14:10:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular指令">
+<meta name="twitter:description" content="指令是所有AngularJS应用最重要的部分。尽管AngularJS已经提供了非常丰富的指令，但还是经常需要创建应用特定的指令。这篇文章会为你讲述如何自定义指令，创建装饰型指令以及组件式指令来扩展html标签.深入指令的所有用法,彻底领会angular指令的魅力。">
+<meta name="twitter:image" content="https://zhufengzhufeng.github.io/img/angular.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Tanlent Corder" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+
+
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tanlent Corder</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <div class="mylogo"></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章收藏</a>
+        
+      </nav>
+      <!--<nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>-->
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhufengzhufeng.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+<article class="outer searchbox" >
+  <form id="search-form"> <!-- 搜索框相关 -->
+    <label for="local-search-input" class="label-en">搜索文章</label>
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索文章" class="search form-control" autocomplete="off" autocorrect="off"/>
+    <i class="fa fa-times" onclick="resetSearch()">重置</i> <!-- 清空/重置搜索框 -->
+
+  </form>
+  <div style="clear: both"></div>
+  <div id="local-search-result"></div> <!-- 搜索结果区 -->
+  <p class='no-result'>No results found </p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 -->
+</article>
+
+
+
+<style>
+  /*搜索框*/
+  .searchbox{
+    padding-top: 20px;
+  }
+  .label-en{
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    line-height: 30px;
+
+  }
+  .search {
+    width: 60%;
+    height: 30px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    border: 1px solid #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    border-radius: 2px;
+    opacity: 0.65;
+    background: #fff;
+    padding:0 2%;
+    float: left;
+  }
+  #search-form,#local-search-result,.no-result{
+    width: 73.33333333333333%;
+    margin: 0 0.833333333333333%;
+  }
+
+
+  /*搜索重置按钮*/
+  #search-form .fa-times {
+    display: none;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    cursor: pointer;
+    color: #999;
+    background:#fff;
+    margin: 0 10px;
+    width: 10%;
+    text-align: center;
+  }
+  #search-form .fa-times:active {
+    background: #d3d3d3;
+  }
+
+  /*搜索结果区*/
+  #local-search-result {
+    font-size: 0.9em;
+    text-align: left;
+    word-break: break-all;
+  }
+
+  #local-search-result ul.search-result-list li:hover {
+    font-weight: normal;
+  }
+
+  /*单条搜索结果*/
+  #local-search-result li {
+    margin: 0.5em auto;
+    border-bottom: 2px solid #d3d3d3;
+  }
+  #local-search-result .search-result-list li:hover {
+    background: rgba(158,188,226,0.21);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  }
+
+  /*匹配的标题*/
+  #local-search-result a.search-result-title {
+    line-height: 1.2;
+    font-weight: bold;
+    color: #708090;
+  }
+
+  /*搜索预览段落*/
+  #local-search-result p.search-result {
+    margin: 0.4em auto;
+    line-height: 1.2em;
+    max-height: 3.6em;
+    overflow: hidden;
+    font-size: 0.8em;
+    text-align: justify;
+    color: #808080;
+  }
+
+  /*匹配的关键词*/
+  #local-search-result em.search-keyword {
+    color: #f58e90;
+    border-bottom: 1px dashed #f58e90;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+
+  /*无匹配搜索结果时显示*/
+  p.no-result {
+    display: none;
+    padding-bottom: 0.5em;
+    text-align: left;
+    color: #808080;
+    font-family: font-serif serif;
+    border-bottom: 2px solid #d3d3d3;
+  }
+</style>
+      <div class="outer">
+        <section id="main">
+
+
+
+
+
+<article id="post-angular/详解angular指令" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+
+
+
+
+
+  
+  <div class="article-meta">
+    <a href="/2014/08/19/angular/详解angular指令/" class="article-date">
+  <time datetime="2014-08-19T09:16:48.000Z" itemprop="datePublished">2014-08-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular指令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>指令是所有AngularJS应用最重要的部分。尽管AngularJS已经提供了非常丰富的指令，但还是经常需要创建应用特定的指令。这篇文章会为你讲述如何自定义指令，创建装饰型指令以及组件式指令来扩展html标签.深入指令的所有用法,彻底领会angular指令的魅力。<br><img src="/img/angular.png" alt=""><br><a id="more"></a></p>
+<h2 id="1-angular中的指令"><a href="#1-angular中的指令" class="headerlink" title="1.angular中的指令"></a>1.angular中的指令</h2><h3 id="1-1-创建指令"><a href="#1-1-创建指令" class="headerlink" title="1.1 创建指令"></a>1.1 创建指令</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span>&gt;</span><span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'appModule'</span>,[]);</div><div class="line">app.directive(<span class="string">'myDire'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="1-2-模板"><a href="#1-2-模板" class="headerlink" title="1.2 模板"></a>1.2 模板</h3><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = angular.module('appModule',[]);</div><div class="line">app.directive('myDire',function () &#123;</div><div class="line">    return &#123;</div><div class="line"><span class="addition">+       template:'&lt;div&gt;Hello&lt;/div&gt;'   </span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="1-3-transclude"><a href="#1-3-transclude" class="headerlink" title="1.3 transclude"></a>1.3 transclude</h3><p>保留指令中的内容<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span>&gt;</span>world<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line"><span class="addition">+    transclude:true,</span></div><div class="line"><span class="deletion">-    template:'&lt;div&gt;Hello&lt;/div&gt;'</span></div><div class="line"><span class="addition">+    template:'&lt;div&gt;Hello &lt;span ng-transclude&gt;&lt;/span&gt;&lt;/div&gt;'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-3-1-面板"><a href="#1-3-1-面板" class="headerlink" title="1.3.1 面板"></a>1.3.1 面板</h4><p>引入bootstrap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.css&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>增加panel.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span>这是一个面板<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span> <span class="attr">ng-transclude</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>修改指令代码<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    transclude:true,</div><div class="line"><span class="addition">+   templateUrl:'panel.html',</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-link函数"><a href="#1-4-link函数" class="headerlink" title="1.4 link函数"></a>1.4 link函数</h3><p>link函数是用来链接视图和scope  </p>
+<ol>
+<li>scope:当前作用域</li>
+<li>element:jq对象</li>
+<li>attrs:当前指令上的属性  </li>
+</ol>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">       transclude:true,</div><div class="line">       templateUrl:'panel.html',</div><div class="line"><span class="addition">+      link: function (scope,element,attrs) &#123;</span></div><div class="line"><span class="addition">+                      </span></div><div class="line"><span class="addition">+      &#125;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-4-1-给面板增加传入的标题"><a href="#1-4-1-给面板增加传入的标题" class="headerlink" title="1.4.1 给面板增加传入的标题"></a>1.4.1 给面板增加传入的标题</h4><p>增加title属性<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">title</span>=<span class="string">"这是头部"</span>&gt;</span>这是一个面板，helloAngular<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加属性值<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class="panel panel-default"&gt;</div><div class="line"><span class="addition">+    &lt;div class="panel-heading"&gt;&#123;&#123;title&#125;&#125;&lt;/div&gt;</span></div><div class="line">     &lt;div class="panel-body" ng-transclude&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>声明标题<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">return&#123;</div><div class="line">    link: function (scope,element,attrs) &#123;</div><div class="line"><span class="addition">+      scope.title = attrs["title"];</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-5-独立作用域"><a href="#1-5-独立作用域" class="headerlink" title="1.5 独立作用域"></a>1.5 独立作用域</h3><p>可以为当前指令设置独立作用域<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line"><span class="addition">+  scope:true,</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-6-动态引用数据"><a href="#1-6-动态引用数据" class="headerlink" title="1.6 动态引用数据"></a>1.6 动态引用数据</h3><h4 id="1-6-1-“-”引用字符串"><a href="#1-6-1-“-”引用字符串" class="headerlink" title="1.6.1 “@”引用字符串"></a>1.6.1 “@”引用字符串</h4><p>指令和作用域间的交互<br>声明控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">app.controller(&apos;appCtrl&apos;,function ($scope) &#123;</div><div class="line">    $scope.title = [</div><div class="line">        &#123;name:&apos;第一个面板&apos;&#125;,</div><div class="line">        &#123;name:&apos;第二个面板&apos;&#125;</div><div class="line">    ]</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>挂载scope上的属性<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;my-dire title="&#123;&#123;title[0].name&#125;&#125;"&gt;这是一个面板，helloAngular&lt;/my-dire&gt;</div><div class="line">&lt;my-dire title="&#123;&#123;title[1].name&#125;&#125;"&gt;这是二个面板，helloAngular&lt;/my-dire&gt;</div></pre></td></tr></table></figure></p>
+<p>在当前作用域下声明title属性，引用对应的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    transclude:true,</div><div class="line">    templateUrl:&apos;panel.html&apos;,</div><div class="line">    scope:&#123;</div><div class="line">        title:&apos;@&apos;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1-6-2-“-”引用scope上的属性"><a href="#1-6-2-“-”引用scope上的属性" class="headerlink" title="1.6.2 “=”引用scope上的属性"></a>1.6.2 “=”引用scope上的属性</h4><p>修改html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">title</span>=<span class="string">"title1"</span>&gt;</span>这是一个面板，helloAngular<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">title</span>=<span class="string">"title2"</span>&gt;</span>这是一个面板，helloAngular<span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加动态属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'appCtrl'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.title1 = <span class="string">'hello1'</span>;</div><div class="line">    $scope.title2 = <span class="string">'hello2'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>修改指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scope:&#123;</div><div class="line">    title:&apos;=&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1-6-3-“-”与”-”区别"><a href="#1-6-3-“-”与”-”区别" class="headerlink" title="1.6.3 “=”与”@”区别"></a>1.6.3 “=”与”@”区别</h4><p>@单向绑定<br>html页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">控制器：&lt;input type=&quot;text&quot; ng-model=&quot;home&quot;&gt;</div><div class="line">&lt;my-dire home=&quot;&#123;&#123;home&#125;&#125;&quot;&gt;&lt;/my-dire&gt;</div></pre></td></tr></table></figure></p>
+<p>控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">app.controller(&apos;appCtrl&apos;,function ($scope) &#123;</div><div class="line">    $scope.home = &apos;home&apos;</div><div class="line">&#125;);</div><div class="line">app.directive(&apos;myDire&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        transclude:true,</div><div class="line">        template:&apos;指令内部&lt;input type=&quot;text&quot; ng-model=&quot;home&quot;&gt;&apos;,</div><div class="line">        scope:&#123;</div><div class="line">            home:&apos;@&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>=双向绑定<br>html页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">控制器：&lt;input type=&quot;text&quot; ng-model=&quot;hobby&quot;&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.controller('appCtrl',function ($scope) &#123;</div><div class="line">     $scope.home = 'home';</div><div class="line"><span class="addition">+    $scope.hobby = 'hobby';</span></div><div class="line">&#125;);</div><div class="line">return &#123;</div><div class="line"><span class="addition">+   template:'指令内部&lt;input type="text" ng-model="hobby"&gt;',</span></div><div class="line">    scope:&#123;</div><div class="line">         home:'@',</div><div class="line"><span class="addition">+        hobby:'='</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-6-4-amp-绑定函数"><a href="#1-6-4-amp-绑定函数" class="headerlink" title="1.6.4 &amp;绑定函数"></a>1.6.4 &amp;绑定函数</h4><p>html绑定方法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-dire</span> <span class="attr">home</span> =<span class="string">"home(person)"</span> <span class="attr">name</span>=<span class="string">"&#123;&#123;name&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-dire</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>指令中调用函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'appCtrl'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.name = <span class="string">'zfpx'</span>;</div><div class="line">    $scope.home = <span class="function"><span class="keyword">function</span> (<span class="params">who</span>) </span>&#123;</div><div class="line">        alert(who);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">app.directive(<span class="string">'myDire'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        template:<span class="string">'&#123;&#123;name&#125;&#125;&lt;div ng-click="home(&#123;person:name&#125;)"&gt;谁的家&lt;/div&gt;'</span>,</div><div class="line">        scope:&#123;</div><div class="line">            home:<span class="string">'&amp;'</span>,name:<span class="string">'@'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="1-7-replace替换指令"><a href="#1-7-replace替换指令" class="headerlink" title="1.7 replace替换指令"></a>1.7 replace替换指令</h3><p>增加replace:true替换原有指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    replace:true</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-8-compile函数"><a href="#1-8-compile函数" class="headerlink" title="1.8 compile函数"></a>1.8 compile函数</h3><p>在link函数前执行，编译模板，返回的函数为link函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;my-dire time=&quot;3&quot;&gt;&lt;/my-dire&gt;</div></pre></td></tr></table></figure></p>
+<p>指令中增加compile函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">return &#123;</div><div class="line">    transclude:true,</div><div class="line">    template:&apos;&lt;div&gt;Hello,zfpx &#123;&#123;title&#125;&#125;&lt;/div&gt;&apos;,</div><div class="line">    compile: function (element,attrs) &#123;</div><div class="line">        var tmpl = element.children();</div><div class="line">        for(var i = 0; i &lt; attrs.time-1;i++)&#123;</div><div class="line">            element.append(tmpl.clone());</div><div class="line">        &#125;</div><div class="line">        return function (scope,element,attrs) &#123;</div><div class="line">            scope.title = &apos;123&apos;;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="2-指令和指令间的交互"><a href="#2-指令和指令间的交互" class="headerlink" title="2.指令和指令间的交互"></a>2.指令和指令间的交互</h2><p>创建多个指令，依赖于girl指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;girl love-money  ng-click=&quot;show()&quot;&gt;Angular MM&lt;/girl&gt;</div></pre></td></tr></table></figure></p>
+<p>创建指令公有部分<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">app.directive(<span class="string">'girl'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        controller: <span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> arr = [];</div><div class="line">            <span class="keyword">this</span>.add = <span class="function"><span class="keyword">function</span> (<span class="params">attrs</span>) </span>&#123;</div><div class="line">                arr.push(attrs);</div><div class="line">            &#125;;</div><div class="line">            $scope.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                alert(arr);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>创建指令间的依赖<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">app.directive(<span class="string">'loveMoney'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="built_in">require</span>:<span class="string">'^girl'</span>,</div><div class="line">        link: <span class="function"><span class="keyword">function</span> (<span class="params">scope,element,attrs,girlCtrl</span>) </span>&#123;</div><div class="line">            girlCtrl.add(<span class="string">'loveMoney'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="3-opener指令demo"><a href="#3-opener指令demo" class="headerlink" title="3.opener指令demo"></a>3.opener指令demo</h2><p>增加css样式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">background</span>: yellow;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">background</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>增加指令<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">opener</span> <span class="attr">title</span>=<span class="string">"标题1"</span>&gt;</span>这是内容1<span class="tag">&lt;/<span class="name">opener</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加引用模板<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span> <span class="attr">ng-click</span>=<span class="string">"show()"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span> <span class="attr">ng-show</span>=<span class="string">"flag"</span> <span class="attr">ng-transclude</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>增加指令<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">app.directive(<span class="string">'opener'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        templateUrl:<span class="string">'open.html'</span>,</div><div class="line">        transclude:<span class="literal">true</span>,</div><div class="line">        scope:&#123;</div><div class="line">            title:<span class="string">'@'</span></div><div class="line">        &#125;,</div><div class="line">        link:<span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attrs</span>)</span>&#123;</div><div class="line">            scope.flag = <span class="literal">true</span>;</div><div class="line">            scope.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                scope.flag = !scope.flag;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="4-opener组"><a href="#4-opener组" class="headerlink" title="4.opener组"></a>4.opener组</h2><p>增加组<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">group</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">opener</span> <span class="attr">title</span>=<span class="string">"标题1"</span>&gt;</span>这是内容1<span class="tag">&lt;/<span class="name">opener</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">opener</span> <span class="attr">title</span>=<span class="string">"标题2"</span>&gt;</span>这是内容2<span class="tag">&lt;/<span class="name">opener</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">group</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>设置指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">app.directive(&apos;group&apos;, function () &#123;</div><div class="line">    return &#123;</div><div class="line">        controller: function ($scope) &#123;</div><div class="line">            var arr = [];</div><div class="line">            this.add = function (scope) &#123;</div><div class="line">                arr.push(scope);</div><div class="line">            &#125;</div><div class="line">            this.close = function (scope) &#123;</div><div class="line">                for(var i = 0; i&lt;arr.length;i++)&#123;</div><div class="line">                    if(arr[i]!=scope)&#123;</div><div class="line">                        arr[i].flag = false;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">app.directive(&apos;opener&apos;,function () &#123;</div><div class="line">    return &#123;</div><div class="line">        templateUrl:&apos;open.html&apos;,</div><div class="line">        transclude:true,</div><div class="line">        require:&apos;^group&apos;,</div><div class="line">        scope:&#123;</div><div class="line">            title:&apos;@&apos;</div><div class="line">        &#125;,</div><div class="line">        link:function(scope,element,attrs,groupCtrl)&#123;</div><div class="line">            scope.flag = false;</div><div class="line">            scope.show = function () &#123;</div><div class="line">                scope.flag = !scope.flag;</div><div class="line">                groupCtrl.close(scope);</div><div class="line">            &#125;;</div><div class="line">            groupCtrl.add(scope);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zhufengzhufeng.github.io/2014/08/19/angular/详解angular指令/" data-id="cis3a23kz0005fxfy12iilkdd" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular的指令/">angular的指令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自定义指令/">自定义指令</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/08/20/node/模块/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          node中的模块
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/08/19/git/git基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">git基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIT的使用/">GIT的使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/NODE/">NODE</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/08/20/node/hexo搭建博客/">Hexo搭建静态博客</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/20/node/buffer/">Buffer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/20/node/模块/">node中的模块</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/19/angular/详解angular指令/">Angular指令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/19/git/git基础/">git基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 JW<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章收藏</a>
+  
+</nav>
+    
+
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/search.js"></script>
+
+  </div>
+</body>
+</html>
